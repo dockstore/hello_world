@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.0
+    steps:
+      - checkout
+      - run:
+          command: |
+            wget -O requirements.txt https://dockstore.org/api/metadata/runner_dependencies?client_version=1.6.0&python_version=3
+            pip install -r requirements.txt
+            cwltool hello_world_checker.cwl hello_world_checker.cwl.json
+
